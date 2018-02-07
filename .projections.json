@@ -1,0 +1,102 @@
+{
+  "lib/micon_web/controllers":{ "type": "controller" },
+  "lib/micon_web/controllers/*_controller.ex":{
+    "type": "controller",
+    "alternate": "test/micon_web/controllers/{}_controller_test.exs",
+    "template":[
+      "defmodule MiconWeb.{camelcase|capitalize}Controller do",
+      "  use MiconWeb, :controller" ,
+      "",
+      "end"
+    ]
+  },
+  "test/micon_web/controllers":{ "type": "tcontroller" },
+  "test/micon_web/controllers/*_controller_test.exs":{
+    "type": "tcontroller",
+    "alternate": "lib/micon_web/controllers/{}_controller.ex",
+    "template":[
+      "defmodule MiconWeb.{camelcase|capitalize}.Test do",
+      "  use MiconWeb.ConnCase, async: true",
+      "",
+      "end"
+    ]
+  },
+
+  "lib/micon_web/views":{ "type": "view" },
+  "lib/micon_web/views/*_view.ex":{
+    "type": "view",
+    "alternate": "test/micon_web/views/{}_view_test.exs",
+    "template":[
+      "defmodule MiconWeb.{camelcase|capitalize}View do",
+      "  use MiconWeb, :view" ,
+      "",
+      "end"
+    ]
+  },
+  "lib/micon_web/channels/*_channel.ex":{
+    "type": "channel",
+    "template":[
+      "defmodule MiconWeb.{snakecase|dot}Channel do",
+      "  use Phoenix.Channel",
+      "",
+      "end"
+    ]
+  },
+
+  "lib/micon":{ "type": "lib" },
+  "lib/micon/*.ex":{
+    "type": "lib",
+    "alternate": "test/lib/micon/{}_test.exs",
+    "template":[
+      "defmodule {project|basename}.{snakecase|dot} do",
+      "",
+      "end"
+    ]
+  },
+
+  "test":{ "type":"test" },
+  "test/lib/micon/*_test.exs":{
+    "type": "test",
+    "alternate": "{}.ex",
+    "template":[
+      "defmodule {snakecase|dot}Test do",
+      "  use ExUnit.Case#, async:true",
+      "",
+      "end"
+    ]
+  },
+
+  "test/test_helper.exs":{
+    "type":"helper"
+  },
+
+  "test/support":{
+    "type":"support"
+  },
+  "config/config.exs":{ "type": "config" },
+  "config/*.exs":{
+    "type": "config",
+    "template":[
+      "use Mix.Config"
+    ]
+  },
+  "config/*.secret.exs":{
+    "type": "secret",
+    "template":[
+      "use Mix.Config",
+      "",
+      "import_config \"{}.secret.exs\""
+    ]
+  },
+
+  "mix.exs":{ "type": "x" },
+  "lib/micon/application.ex":{ "type": "app" },
+  "lib/micon_web/router.ex":{ "type": "router" },
+  "lib/micon_web.ex":{ "type": "web" },
+  "test/fixtures":{ "type":"fixture" },
+  "test/fixtures/*":{ "type":"fixture" },
+  "priv/repo/migrations":{ "type": "migration" },
+  "*.exs": { "console": "iex -S mix" },
+  "*.ex": { "console": "iex -S mix" }
+}
+
