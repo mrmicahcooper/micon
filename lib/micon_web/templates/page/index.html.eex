@@ -24,7 +24,7 @@ fetch("http://localhost:4000/icons/#{key}").then(function(e){if(e.ok)return e.te
           <svg height="100%" width="100%" class='border-box vt'> <use xlink:href="#<%=svg.filename%>"></use>
           </svg>
         </div>
-        <code class='f6 bg-light-gray gray dib w-100 pre overflow-hidden pa2'><%="<svg><use xlink:href=\"##{svg.filename}></use></svg>"%></code>
+        <code class='f6 bg-light-gray gray dib w-100 pre overflow-hidden pa2'><%="<svg><use xlink:href=\"##{svg.filename}\"></use></svg>"%></code>
       </div>
     <% end %>
   </section>

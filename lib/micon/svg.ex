@@ -45,7 +45,7 @@ defmodule Micon.Svg do
   defp generate(filepath, source_dir) do
     doc = File.read!(filepath) |> Floki.parse()
     key = Path.relative_to(filepath, source_dir) |> Path.dirname()
-    filename = Path.basename(filepath, ".svg")
+    filename = key <> "-" <> Path.basename(filepath, ".svg")
     viewbox = Floki.attribute(doc, "svg", "viewbox") |> List.first()
 
     svg_paths = doc
