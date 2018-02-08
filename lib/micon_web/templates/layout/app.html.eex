@@ -8,21 +8,21 @@
     <meta name="author" content="Micah Cooper">
 
     <title>Micon</title>
-    <link rel="stylesheet" href="https://www.herokucdn.com/purple3/latest/purple3.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="bg-gradient-primary white normal pa3">
-        <h1> Micon </h1>
-      </header>
+    <header class="bg-dark-gray white pa2">
+      <h1 class="normal ph2">Micon</h1>
+    </header>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

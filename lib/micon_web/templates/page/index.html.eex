@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;visibility:hidden">
+<defs></defs>
+    <%= for svg <- @svgs do %>
+      <symbol id='<%=svg.filename%>' viewbox='<%=svg.viewbox%>' ><%= raw svg.svg_paths%></symbol>
+    <% end %>
+</svg>
+
+
+<%= for svg <- @svgs do %>
+  <div class='h4 w3 dib ma2 shadow-1 br2 ba b--light-gray'>
+    <svg height="100%" width="100%">
+      <use xlink:href="#<%=svg.filename%>"></use>
+    </svg>
+    <code class='code bg-light-gray ba b--gray br2 ph2 tc'>
+      <%=svg.filename%>
+    </code>
+  </div>
+<% end %>
