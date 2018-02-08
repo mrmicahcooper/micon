@@ -8,23 +8,22 @@
 </svg>
 
 <%= for {key, svgs} <- @grouped_svgs do %>
-  <section class='w-100'>
-    <header>
-      <h1 class='f3'><%=key%></h1>
-      <p>Add this in the <%="<head>"%> of your html page</p>
-      <code class='bg-light-gray gray dib f6 pre pa2 overflow-x w-100'><%="""
-<script>
-fetch("http://localhost:4000/icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});
-</script>
+  <section class='mw8 pa3 center'>
+    <header class='mb3'>
+      <h1 class='f3 ttc mv2'><%=key%></h1>
+      <p></p>
+      <code class='bg-light-gray gray dib f7 pre pa2 overflow-x overflow-y-hidden w-100'><%="""
+<script type='text/javascript'>fetch("http://localhost:4000/icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});</script>
 """%></code>
     </header>
     <%= for svg <- svgs do %>
-      <div>
-        <div class='h2 w2 mb2'>
-          <svg height="100%" width="100%" class='border-box vt'> <use xlink:href="#<%=svg.filename%>"></use>
+      <div class='mw4 br2 ba b--light-gray dib'>
+        <div class='bb b--light-gray pa1 db f7 gray code pre truncate tl'><%=svg.filename%></div>
+        <div class='h3 w3 pa2 tc center'>
+          <svg height="100%" width="100%" class='border-box tc'> <use xlink:href="#<%=svg.filename%>"></use>
           </svg>
         </div>
-        <code class='f6 bg-light-gray gray dib w-100 pre overflow-hidden pa2'><%="<svg><use xlink:href=\"##{svg.filename}\"></use></svg>"%></code>
+        <code class='f7 bg-light-gray gray dib w-100 pre pa1 lh-copy overflow-x overflow-y-hidden w-100'><%="<svg><use xlink:href=\"##{svg.filename}\"></use></svg>"%></code>
       </div>
     <% end %>
   </section>
