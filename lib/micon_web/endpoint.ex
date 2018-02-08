@@ -7,6 +7,7 @@ defmodule MiconWeb.Endpoint do
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
+  plug MiconWeb.Cors
   plug Plug.Static,
     at: "/", from: :micon, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
