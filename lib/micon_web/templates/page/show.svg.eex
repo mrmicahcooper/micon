@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;visibility:hidden">
   <defs>
   <%= for svg <- @svgs do %>
-    <symbol id='<%=svg.filename%>' viewbox='<%=svg.viewbox%>' ><%=svg.svg_paths%></symbol>
+    <symbol id="<%=svg.filename%>" viewbox="<%=svg.viewbox%>" >
+    <title><%=svg.key%></title>
+    <%=svg.svg_paths%>
+    </symbol>
   <% end %>
   </defs>
 </svg>

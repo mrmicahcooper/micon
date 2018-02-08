@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;visibility:hidden">
-<defs></defs>
-    <%= for svg <- @svgs do %>
-      <symbol id='<%=svg.filename%>' viewbox='<%=svg.viewbox%>' ><%= raw svg.svg_paths%></symbol>
-    <% end %>
+  <defs>
+  <%= for svg <- @svgs do %>
+    <symbol id='<%=svg.filename%>' viewbox='<%=svg.viewbox%>' ><%= raw svg.svg_paths%></symbol>
+  <% end %>
+  </defs>
 </svg>
 
-
-<%= for svg <- @svgs do %>
-  <div class='h4 w3 dib ma2 shadow-1 br2 ba b--light-gray'>
-    <svg height="100%" width="100%">
-      <use xlink:href="#<%=svg.filename%>"></use>
-    </svg>
-    <code class='code bg-light-gray ba b--gray br2 ph2 tc'>
-      <%=svg.filename%>
-    </code>
-  </div>
+<%= for {key, svgs} <- @grouped_svgs do %>
+  <section class='w-100'>
+    <header>
+      <h1 class='f3'><%=key%></h1>
+      <p>Add this in the <%="<head>"%> of your html page</p>
+      <code class='bg-light-gray gray dib f6 pre pa2 overflow-x w-100'><%="""
+<script>
+fetch("http://localhost:4000/icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});
+</script>
+"""%></code>
+    </header>
+    <%= for svg <- svgs do %>
+      <div>
+        <div class='h2 w2 mb2'>
+          <svg height="100%" width="100%" class='border-box vt'> <use xlink:href="#<%=svg.filename%>"></use>
+          </svg>
+        </div>
+        <code class='f6 bg-light-gray gray dib w-100 pre overflow-hidden pa2'><%="<svg><use xlink:href=\"##{svg.filename}></use></svg>"%></code>
+      </div>
+    <% end %>
+  </section>
 <% end %>

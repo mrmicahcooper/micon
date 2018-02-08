@@ -1,11 +1,14 @@
 defmodule MiconWeb.PageController do
   use MiconWeb, :controller
 
+  plug :put_layout, false when action in [:show]
+
   def index(conn, _params) do
     svgs = Micon.Svg.all()
+    grouped_svgs = Enum.group_by(svgs, &(&1.key))
 
     conn
-    |> render("index.html", svgs: svgs)
+    |> render("index.html", svgs: svgs, grouped_svgs: grouped_svgs)
   end
 
   def show(conn, _params) do
