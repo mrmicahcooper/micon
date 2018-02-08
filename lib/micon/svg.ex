@@ -1,4 +1,6 @@
 defmodule Micon.Svg do
+  defstruct [:key, :filename, :filepath, :viewbox, :svg_paths]
+
   use GenServer
 
   @table_name :icons
@@ -35,34 +37,33 @@ defmodule Micon.Svg do
     source_dir
     |> Path.join("**/*.svg")
     |> Path.wildcard()
-    |> Stream.map(&generate/1)
-    |> Stream.each(&insert(&1, source_dir))
+    |> Stream.map(&generate(&1, source_dir))
+    |> Stream.each(&insert/1)
     |> Stream.run()
   end
 
-  defp generate(file_path) do
-    doc = File.read!(file_path) |> Floki.parse()
-    filename = Path.basename(file_path, ".svg")
+  defp generate(filepath, source_dir) do
+    doc = File.read!(filepath) |> Floki.parse()
+    key = Path.relative_to(filepath, source_dir) |> Path.dirname()
+    filename = Path.basename(filepath, ".svg")
     viewbox = Floki.attribute(doc, "svg", "viewbox") |> List.first()
+
     svg_paths = doc
                 |> Floki.find("g:first-child")
                 |> Floki.attr("[fill]", "fill", fn(_) -> nil end)
                 |> Floki.raw_html()
 
-    %{
-      file_path: file_path,
+    %__MODULE__{
+      key: key,
+      filepath: filepath,
       filename: filename,
       viewbox: viewbox,
       svg_paths: svg_paths,
     }
   end
 
-  defp insert(%{}=svg_data, source_dir) do
-    key = svg_data.file_path
-          |> Path.relative_to(source_dir)
-          |> Path.dirname()
-
-    :ets.insert(@table_name, {key, svg_data})
+  defp insert(%{}=svg_data) do
+    :ets.insert(@table_name, {svg_data.key, svg_data})
   end
 
 end
