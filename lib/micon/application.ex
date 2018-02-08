@@ -11,7 +11,7 @@ defmodule Micon.Application do
       # Start the endpoint when the application starts
       supervisor(MiconWeb.Endpoint, []),
       # Start your own worker by calling: Micon.Worker.start_link(arg1, arg2, arg3)
-      # worker(Micon.Worker, [arg1, arg2, arg3]),
+      worker(Micon.Svg, [%{source_dir: Application.get_env(:micon, :svg_source_dir)}]),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
