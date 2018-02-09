@@ -13,7 +13,7 @@
       <h1 class='f3 ttc mv2'><%=key%></h1>
       <p></p>
       <code class='bg-light-gray gray dib f7 pre pa2 overflow-x overflow-y-hidden w-100'><%="""
-<script type='text/javascript'>fetch("http://localhost:4000/icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});</script>
+<script type='text/javascript'>fetch("#{page_url(@conn, :index)}icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});</script>
 """%></code>
     </header>
     <%= for svg <- svgs do %>
