@@ -1,0 +1,4 @@
+#!/bin/bash
+# usage: bin/compile <build-dir>
+
+echo "Micon: Svg "

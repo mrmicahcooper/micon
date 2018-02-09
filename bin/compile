@@ -1,0 +1,24 @@
+#!/bin/bash
+# usage: bin/compile <build-dir> <cache-dir> <env-dir>
+
+build_dir=$(cd "$1/" && pwd)
+cache_dir=$(cd "$2/" && pwd)
+env_dir="${3}"
+
+#enable some kina file doohickey
+shopt -s extglob
+
+#make an micon_icons directory to store all the icons
+mkdir $build_dir/micon_icons
+
+#move the icons into the build_dir
+mv $build_dir/!(micon_icons) $build_dir/micon_icons
+
+#copy the phoenix app from he buildpack into the build_dir
+cp -r * $build_dir
+
+#clone the elixir buildpack
+git clone https://github.com/HashNuke/heroku-buildpack-elixir.git 
+
+#run the elixir buildpack
+cd heroku-buildpack-elixir && ./bin/compile $1 $2 $3
