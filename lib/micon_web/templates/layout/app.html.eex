@@ -9,12 +9,10 @@
 
     <title>Micon</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body>
+  <body class='sans-serif'>
     <header class="bg-dark-gray white pa2">
       <h1 class="normal ph2">Micon</h1>
     </header>

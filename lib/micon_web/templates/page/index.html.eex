@@ -11,7 +11,9 @@
   <section class='mw8 pa3 center'>
     <header class='mb3'>
       <h1 class='f3 ttc mv2'><%=key%></h1>
-      <p></p>
+      <p class='gray f6'>
+        Add this script tag to the &lt;head&gt; of your HTML page:
+      </p>
       <code class='bg-light-gray gray dib f7 pre pa2 overflow-x overflow-y-hidden w-100'><%="""
 <script type='text/javascript'>fetch("#{page_url(@conn, :index)}icons/#{key}").then(function(e){if(e.ok)return e.text();throw new Error("fetch error")}).then(function(e){var t=document.createElement("div");t.innerHTML=e,document.body.insertBefore(t,document.body.childNodes[0])});</script>
 """%></code>
