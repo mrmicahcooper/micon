@@ -1,4 +1,12 @@
 #!/bin/bash
-# usage: bin/compile <build-dir>
+# usage: *bin/compile <build-dir>
 
-echo "Micon: Svg "
+build_dir=$(cd "$1/" && pwd)
+
+if ls $build_dir/**/*.svg &> /dev/null; then
+  echo "Micon Svg"
+  exit 0
+else
+  echo "No Svgs Detected"
+  exit 1
+fi
