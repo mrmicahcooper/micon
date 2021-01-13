@@ -3,7 +3,7 @@ defmodule Micon.SvgTest do
 
   test("Svg boots up and generages icon symbols") do
     svgs = Micon.Svg.all()
-    assert length(svgs) == 3
+    assert length(svgs) == 4
   end
 
 end
